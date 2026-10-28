@@ -1,0 +1,56 @@
+
+
+A50Insurance Installation
+
+step 1
+npm create vite@latest
+
+give project name
+select type script
+select react
+say yes to npm build and run dev
+
+this creates a app.tsx with a default page showing vite
+
+
+step 2 
+install the router
+src: https://www.w3schools.com/react/react_router.asp
+
+ run the command:
+ npm install react-router-dom
+
+ wrap app
+ in App.tsx use wrapper <BrowserRouter>
+
+
+ dependencies
+
+ npm install react-bootstrap
+ npm install bootstrap
+ npm install axios
+
+ -- images files
+
+ rename src/assets to src/images
+ put pics there
+ create public/images
+
+ script contents
+ A500.bat 
+
+ cd aProject*
+ cd A500Insurance
+ npm run dev
+
+ For Docker builds: note: --
+
+all ts configs : there are 2 files   
+
+change ignore unused parm and variables to false 
+or docker will not build - the errors 
+will stop the build
+
+
+
+

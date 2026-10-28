@@ -1,0 +1,96 @@
+
+A500 Design Document
+
+
+why: faster response with out complex of ssr
+
+ref:
+
+react js set up project
+W3schools set up router
+50 install on GitHub 
+not using create-react-app then what key it in ?
+
+npm install --save-dev @types/react @types/react-dom
+
+basic create W3schools
+
+A) npm create vite@latest  <- as a400
+
+1) install build tool
+
+npm i -g create-vite
+npm create vite@latest a500Insurance -- --template react
+
+directory
+npm install
+npm run dev
+
+** compare with 400 setup
+
+checks : can state be saved
+check: does vite interfer with other apps a400,a600
+
+
+a50install
+
+
+ 1. npx create-react-app a50insurance  
+
+       a change to a50directory before running 2.
+   then, 
+
+      npm install --save core-js@^3
+
+
+ 2. npm install react-router-dom@5     
+    (must use version 5 or will not compile.)
+
+ 3. "reactbootstrap" - 
+     npm install react-bootstrap bootstrap
+
+ 3.5 npm install axios
+
+ 3.6 npm install jquery --save
+
+
+ 4. do not duplicate src or public or you get props.type.error just
+    delete src and public and copy new ones in.
+
+ 4a. for ie9,10,11 
+:
+
+npm install react-app-polyfill
+
+npm audit fix --force
+
+put "ie 11" first in the browser.list in package.json.
+
+ run these 2 commands:
+
+   SETX REACT_APP_A50_USE_STYLES Y   
+
+   SETX REACT_APP_A50_BASE_URL  "http://localhost:3200/"
+
+   SETX REACT_APP_A50_PROMOTION_CODE  "100"
+
+   SETX REACT_APP_A50_EMAIL  "1@2.3"
+
+   SETX REACT_APP_A50_USE_STAY "Y"
+
+   SETX REACT_APP_A50_USE_FOCUS "Y"
+
+   SETX REACT_APP_A50_USE_NAV "Y"
+
+    SETX REACT_APP_A50_USE_ACTIONS "Y"
+
+
+del public/src in created app and replace by ones in current project.
+
+npm start starts app
+
+
+ 5. NPM start - starts app
+
+ 6. npm run build - files to prod.
+ 

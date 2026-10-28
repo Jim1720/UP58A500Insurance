@@ -1,0 +1,1514 @@
+ 
+ Log
+
+October 25 2026
+================
+1. fixed interface bug. Why: get auth routine was returning start or a dest 
+   that return was to the local code , not to the interface caller
+2. fix: assign destination to get auth await function like this:
+   and add : promise<string | any> to function header for type script
+
+    var destination = getauthrecord()
+    return destination
+
+3. now the caller no longer gets undefined for an invalid path name error
+
+=======
+
+
+
+ 1.12
+
+ signin - is working and complete
+ register - stub is coded
+ planquestion - complete is coded
+
+ backing up to M2 
+
+ date edit pulled in from 600
+ register - mostly coded -  screen coding - 
+
+    ( ) dob edit
+    ( ) how to read gender state dropdowns
+
+checking light mode
+
+1.11
+
+register screen - working except state and gender and dob edit
+                  added confirm mode
+light mode and hovering - partially working 
+update screen - added useEffect to load data to screen
+
+1.15
+
+classic - copied 410 screen - it works - tried changing pic size for missing border radius on right no useEffect
+plan - should not read more than 1 time tried using localStorage as a stopper no useEffect
+update - here, the useEffect fires one time, good, but not find doc element to look through
+         do not put a form in as there are coding rules
+search customers - stubbed search customer screen from sign in
+...
+rewrote plan screen it is working great !
+next
+( ) update fix initial read use plan screen as a template to place the db call at top !
+( ) added msg to sign in - works
+( ) add msg to reg does not working
+
+a.m - plan fixed - working
+a.m - classic fixed - working 
+
+p.m - update
+( ) load logic working - had to translate id to database name did not want to use db names in coded
+    not eligant ! :)
+    
+( ) most update fields are loading successfully
+( ) password update edits not working
+( ) confirm logic not working
+( ) can not change fields !
+
+backed up 
+
+( ) working on search customer screen - coded works but coming back too many re-renders when setting fields
+
+review 1.16
+
+(X) top level - need btns to return to start
+(p) top level - info needs to be filled in
+(ok server checks this) = reg - check promo edit does a4server do this ?
+( )X reg - gender, state drop dropdowns - put selected value in to data
+(x) dob - code date edit
+(X) email
+(x) phone
+(X) links - sign out link does not working
+( ) light switch - portions of screen black
+( ) update - fields not updating check controlled form examples 
+
+1.16 p.m.
+
+( ) register - state and gender are selectable to database
+( ) dob edit not working
+
+( ) update - not loading correct state and gender
+( ) update not updating
+(X) fixed infinite loop 
+
+( ) light mode does not cover entire screen left right borders show 
+
+
+A120 - check delete and add 
+
+1.17
+
+update - seperated state variables and used simple id names 
+update - screen loads ok
+update - unable to update field with on change 
+         apparently new values must store in localstorage does state revert
+         keep load logic for adjustments etc.
+update updates ok
+claim started part of the screen
+backing up
+
+1.18
+
+register -
+
+    date handling
+
+update -
+
+    (X) removed prevent default it works
+    (fixed) wipe out password
+    (X) wipe out plan
+    (X) can not key extra chars in fields - addr 
+
+    (x) middle name missing 
+    ( ) gender M reads as blank from database ! : are you serious ?
+
+    birth date formatting on load - ok
+    birth date edit  
+
+    (x) password edit and update 
+
+backing up on 1.18 pm
+
+basic claim screen up and running with edits !
+basic history screen up and running !
+
+backing up on 1.19 pm 
+
+1.20
+
+( ) coded interface and database actions for P20
+( ) lifted planArray into high state to only do 1 plan read when needed for plan screen or claim calc 
+    these do not always happen
+( ) for combo box setting create local variables
+    claimHistoryOeration = 'adjustment' or 'copy'
+    claimHistoryOperationType 
+    claimHistoryOperationService 
+
+1. ( ) write new plan reader used by plan and claim and include isLoaded 
+   plan screen and claim calc now use 1 sigle plan read
+
+2. put adjustment/copy operation, type and sevice into state and pass parms to hist and claim 
+   use single object
+
+3. (A100) add to links to recent existing screen from app list
+4. test plan screen with new reader
+5. finish clain type logic
+
+1.21
+
+1. history buttons added - menu and new work 
+2. update - fixed code for middle name ; read ok cust 130 not updating 
+   ( ) sign in - gender M on database but reads as blank - error is in database level of debugging 
+3. update - password edits work and it was updated ok
+4. email and phone edits added on update screen and register screen
+
+next steps:
+
+(X) dob on register - fixed used id=screenbirthdate 
+( ) dob on update - edit ok but putting blank to db 
+( ) forcing dob on update to 1.1.1955 for now fix this getting 1900 ot of the code
+
+( ) update - db read fails for gender it's M on db but reads blank
+( ) update - dob edit puts 1900 into the database
+ 
+
+P20 interface - coded began in wait.tsx with a interface mode indicator
+                if q not specified auth checks turned off for testing
+
+( ) auth checks in signin register and other screens 
+    use 'interface' authCheck() for one single routine
+
+hookup env's - verify this works in prod and is not hard coded check A50
+
+finish claim
+finish history
+
+light mode
+
+( ) claim - coded on type change logic
+( ) history - coded onAdjust and onCopy
+( ) claim - coded screen load routine for adjustment copy
+( ) claim - process logic for adjustment only copy does not need it
+
+backing up 
+
+1.22
+
+( ) consider moving all the localStorage to 1 app object passed as parms to all components
+    and kept at top
+( ) investigate light not covering screen
+    hard code top div to green 
+
+( ) finish claim 
+    pulled stampadjustedclaim() from A600 github
+    adding stamp logic with .then
+
+( ) fix and clean up claim - add type fields
+
+( ) p20 interface
+
+( ) 100 list logic
+
+[1] light mode is fixed by using the top div in application
+    ( ) need to extend screen lines down and test on large screen
+    ( ) link top missing 
+    ( ) history buttons
+    ( ) all other works
+
+o finish load fields
+o plug new claim id in adjustment process
+o load messages
+
+( ) fix claim service load and add service to adjustement-loaded fields and claim-add fields
+( ) fix plan logic on new claim get the plan from the applicaition state (new state) 
+    that will be set by plan screen
+( ) add plan edit to claim screen : warning message and button
+( )  load logic will need type fields added and perhaps service field
+( )x adjustment load and stamp logic coded
+( )p  add type fields once medical is working with adjustment and copy logic
+( )  verify all data and stamps on customer and claim 
+( )  history: add top bottom and middle
+( )  history: add action controls
+( )  history add stay and focus
+( )  claim: use stay and focus
+( )  get interface logic working
+( )  interface: set up env var for test non-auth mode
+( )  interface: set up s() to be set on by env var
+( )  interface: add info message field to start to be used by unauth and no app dest
+( )  sign in customer search 
+
+vb or access
+
+( )x claim - type edits coded and commented
+( )p claim - build entired dropdown = can not find var - check missing syntax 
+
+    
+1.23
+
+( ) start - white hover for spans at bottom 
+( ) start - removed start message for now
+( ) claim = combo box works on claim type Praise God 
+( ) claim - add edits and history for confine, release and tooh number - in process 
+
+p.m.
+ 
+(x) medical confine and release edits finally fixed bad code they work
+(x) dental , vision and drug claims enter correct field data
+(x) check edits on the above all edits pass *Praise God*
+( ) service missing on the claim 
+    (x) initial service good
+    ( ) clicked new service is still pulling original 1st service 
+( ) everything yes everything else is just fine on claim entry 
+( ) lift local storage to state : coding use ...parm and 1 object
+( ) perform calc on calim add for amounts
+
+status: entry all works 1 issue noted
+
+next: adjustments
+next: plan edit on claim entry
+
+backing up second of day; first was for power outage - all in this app looks God
+when power was pulled buttons changed and became white!
+backed up that copy after outage and reloaded 
+all looks good so far Praise God
+
+backing up
+
+1.24
+
+history - add adjustment lines
+claim - added adjustment load logic
+claim - see notes in use effect
+
+thus: use effect works in update to load the screen propertly so, therefore,
+      on the claim screen move the service load from 'outer space' at top
+      to a performed routine in use effect based on 2nd pass logic
+
+wait.tsx
+
+    in - line 
+
+        set timer
+        if state dest ne '' stop timer and go to unauth or star msg as function of env.unauthmode variable 
+
+    use effect
+
+        call feature rtn to get app dest decrypt and use record
+        do not set state but use local storage here (never lift to app stat objct)
+        to avoid too many rerenders
+
+
+
+wait : use effect call feature routines how else?
+
+( ) claim : adjustment screen loaded with control logic in use effect
+( ) claim : proposed: have the use effect drive the 'outer spoace' logic as an inline function
+    to loade services poc
+
+( ) wait: use effect drives (user auth and set local storage destination ) 
+
+( ) pm interface looks good so far - app dest is read ok 
+( ) note: app dest comes first in the inteface must work in test and in prod situations
+( ) check operation of code in wait.tsx pass1 pass2 
+
+1.26
+
+( ) claim entry - fixed confine release dates on copy
+( ) claim fixed confine release date edit 
+( ) fixed tooth number to work
+( ) turned off vision and drug claims for now
+( ) moved top history into routine in the use effect similary to udpate use effect 
+    to solve latency issue when claim added was not showing also extra code running when
+    insalling wait.tsx
+( ) added hist loaded resets in other screens   
+( ) if hist fix works fix the plan screen to 
+
+( ) tried to rewrite history with use effect   read.then() but the screen remained empty
+( ) claim can not put spaces in fields 
+( ) copy blows up sometimes 
+( ) need to click reload history to see latest claim built
+
+( ) reviewed update vs history - only difference - put screen data into state after loading
+    all of above issues tied to this 
+    [fixed] added displaylines to state fixed this 
+    * make same change on plan screen too 
+
+( ) updated = fixed handle change not to trim spaces out
+
+( ) plan apply history code fixes removing top code and using state to hold display lines
+
+( ) history add unique keys to each div
+( ) claim remove defaultValue on all inputs they are controlled
+( ) history onCopy not seeing the state claimData
+( ) find out who is reading services out of order see displaylines
+( ) plan fix the plan screen
+( ) do not add plan edit until copy and adjustment fixed  
+  
+
+( ) claim add is completely working !
+( ) claim copy works on claim #1 only but date of service gets edit error 
+
+( ) CPM setClaimsData - this state data does not persist until the onAdjust or onCopy is produced
+     tried using local storage 
+
+backing up 
+
+*** post backup suggestion:
+*** as prior apps do just re-read the claim data into the
+*** claim component loads ! :) ah ha ! 
+
+block 1
+(Success) adjustments and copies are working for medical dental 
+          service date edit removed use date routine
+          fix redirect navigates on successful adjustment logic
+
+block 2 - completed
+plan edits - ok
+and calc amounts
+-- read services for all claim types returns servicecostlist declared at top
+
+
+a.m. backup 1.27.26
+
+block 3 - done
+(success)x fit finish on adjustment messages 
+
+bloc 4 - done 
+(success)x 'sign button' at left of type rows 
+(siccess)x adjust vision drug claims - blank edit, reload find db name
+
+ bloc 5  - done  
+ (x)x top mid bottom - completed 
+ (Success)x action buttons - bult load function in claim ; built action buttons in history
+ (success) stay focus
+
+ stay focus - add top claim message if stay on
+              ( ) code done on this ?!
+              ( ) add java script to position at #focus
+
+ a.m. backup
+
+ start here -- above looks good 
+
+ block 5a: ( )x coded keep testing
+   consider adding message at top of claim screen saying
+   'claim xxx was adjusted' if stay is on 
+   
+    then clear main menu message
+ 
+ block 6 - x
+ pay ( )x  - use a popup and stay/focus conventions
+
+    ( ) owed going to -1
+    ( ) type 1 but keeps looping
+    ( ) immediate screen problem as before: stay = on but screen not refreshing 
+
+    stay focus not working for pay
+
+ pay history ( )x - seperate screen with stay/focus conventions
+
+     ( ) screen does not show current data 
+
+block 6a  fit finish
+
+issues on update screen = what ? combos update ? 
+sparkle on screens
+
+    o added effects on register
+    o added effects on sign in
+
+animation on wait screen
+history blank screen on cust 1
+passwords blank out why ?
+
+
+
+block 7
+
+( ) test start a500 parameters in paramter table
+
+
+
+interface - status - working - refresh/signout paths not tested 
+            status - parmeter table reads not done in place of envirnment variables
+
+
+* use parm db not env since they have to be hard coded in the container I remember
+  for react
+
+   -- read 2 parameters from parameter database to control the interface
+      test mode A500TestMode
+      dest screen A500DestScreen
+   -- note: envronment variables had to be hard coded in the container 
+
+ * interface hooked up : / goes to wait screen
+
+ ( ) put moving boxes on wait screen see A30
+ ( ) code A100 link test list
+ ( ) read parameter database
+ ( ) interface test cases 
+
+    1. override test mode - no parm - defaults to start screen
+    2. parm = auth - simulate auth screen
+    3. parm = start - simulate start message
+    4. q=andrew - hard code check 
+       true --> start
+       false -> unauth or start  + message 
+   
+( ) interface is functioning basically 
+( ) need to finish coding the animations and how to clear the timer before use
+( ) added start submessage in case of use
+
+( ) interface tested except for :
+    a. signout
+    b. refresh 
+
+( ) wait screen timer effects need to be coded and tested
+
+(x) history - top mid bottom working Praise God
+(x) history - adjustment button edit - keep button spacing consistent - stop adjustment on adjsted/paid claims
+
+next up : block 5 (action btns/stay/focus) and finish 7 (refresh/signout)
+then 4 vision drug
+then 6 pay(history)
+
+backing up p.m.
+
+a.m.
+
+expand adj copy msg
+worked on vision drug claim entry and adjustments
+sign button on claim types
+
+( ) vision entry ok
+( ) drug entry wrong service list; then ok
+(fixed) entry claim type badge missing at left type line
+
+( ) adj - good message on adj entry
+( ) blank screen after proc adj - debug
+( ) missing action buttons on history - debug - actionButtons undefined 
+( ) stay focus button click delay only shows on next screen
+
+( ) search customers - go thourgh interface and get 'andrew' on customer 10 to show on
+    cust serch
+    (yes) no user stamp on cust add had to add manual 
+    ( ) user stamp missing cust add
+    ( ) add user missing after interface logon 
+
+( ) passwords blanked out
+( ) claim - action buttons are undefined even after parm pass what ?
+
+p.m.
+
+( ) finally have an action button to show - at the very end of the day
+    had to hard code the <a>'s and substitute elements
+    ( ) displays as blue rectangle
+    ( ) click fails
+
+backing up 
+
+( ) please tell me WHICH date is invalid on the history screen
+( ) debug that a date is invalid anyway also n'as on confine.release
+
+( ) ** action buttons showing for ADJ-27 fix some of this logic praise God
+
+fix:
+copy - service date put is invalid
+
+questions: 
+
+( ) pay - reshow screen with focus and display label and box below claim for amount : ( ) 
+( ) stay only - at top show adj cpy pwy msg at top of screen below title
+
+( ) action button are working just fine
+
+working:
+
+( ) stay - no immediate change and not working
+    ( ) put 'stayLit' in app state to force screen reload - what not working ? 
+
+( ) interface
+    (test successful) sign out
+    (test successful) refresh
+    ( ) retest these with auth coding on signin
+
+( ) interface read 2 parm variables
+
+( )x links apps start - coded interface puts in local storage
+
+( ) animation on the wait screen
+
+poc can we use and deploy asp core net tools 9 and sql 9 ?? so we can use 2025
+but we do not have 2025 loaded so google first?
+
+a.m. fixed date messages in claim add to clarify which date date edit returns '' not n/a4server
+p.m. stay - moved state from app to screen still not working
+
+p.m - stay is working just fine 
+p.m. - focus button is working but focus claim does not show at top message
+
+1.30 system test
+
+a.m. - drug copy fails dental copy fails
+a.m. - cancel button fails
+a.m  - unlike copy 'new' pulls the claim data
+
+a.m. - pay claim - most written except = action, stay , focus logic
+a.m. - unauth check coded and commented out on signin screen
+
+( ) payment history is coded
+
+where are we ?
+
+system test
+
+pay 
+pay history
+interface db reads for dest and test mode (do we want these) overhead ?
+auth protection coding on sign in  register and all screens using A500TestMode
+
+status:
+
+POC - did not deploy T100Insurance timed out runs in test ok
+
+o reverted: wait and interface after wierd errors
+o undecided about parm driving test mode and start dest
+o pay: does pay claim but need to test edits
+o pay hist: does not find claims
+o fit finish: add sparkle to top level screens
+
+backing up
+
+1.31
+
+( ) pay history -  
+    ( ) screen is now appeareing after fixing the 'sessionstorage' to 'localstorage' issue
+    ( ) screen does not reflect subsequent requests without refresh
+    ( ) pass total and owed and show on screen at bottom for informational
+
+
+( ) adj / cpy :
+    ( ) adjust eye claim goes to medical and removes the e1 
+    ( ) copy same problem 
+    ( ) 1. set screen type to input claim - good working 
+        2. set service box - good working 
+
+        3. (fixed) load type field data
+           [claim loader] dpes not find 'eyeware' this means that the id='eyeware' is not seen ??
+           it only sees confine and release even though screen type is chainged first ??
+           * loader sees the confine release date id's but other fields loaded in subsequent switch statement
+
+        4. (Success)x selection of origional claim service  in the service combo 
+
+            (all of above works except #5)
+
+        5. immediate access fails - first copy attempt fails to load screen data unless you go to menu
+           (second copy after copy fails)
+           add alert in read claim .... 
+
+        6. summary: most of data copied but 1) service combo = 1st entry and 2) type field(s) blank
+           
+
+( ) auto focus does not work
+( ) password blanks out on 1 
+( ) how to impliment test mode w/o db call and startDest w/o db call 
+( ) wait animation 
+( ) auth testing and test mode override
+
+( ) interface added parm read for , one, single record, for efficency, with keywords to set
+    mode and startDest
+
+    ( ) test A500 override for prod key worked
+    ( ) test A500 override for startDest 
+
+status:
+
+1. claim adjustment and copy fixed so type fileds will show up from prior claim as well
+   as the combo box selection from the prior claim
+2. interface will now read the parameter database to get options and take defaults if no
+   record is found
+
+issues:
+1. copy x 2 does not laod history
+2. need to add focus logic when history loads
+3. test stay-no-focus history message at top of history
+4. (fixed) see issue below: outch: interface: do not see wait screen if in test mode 
+5. pay history needs refresh to show current pay history
+6. interface issue:
+
+-------------------------------------------------------------------
+A45 server must always be running 
+reason:
+all the top logic executes on all pages or network errors 
+occur
+may need to mitigate this but do not wish to add read aheads
+--------------------------------------------------------------------
+
+===== 2 instances of vite running =============
+produces a white screen
+besure to only have 1 running
+
+==== poc net 10 -- with efcore tools 9.0 timed out into azure 
+
+backing up
+
+-- read me contents --- 
+
+ead me summary ---
+
+1. adjustment and copy logic fixed
+   solved missing data
+   solved combo remembering prior selection
+2. interface
+   read one single parameter record to override default modes
+3. issues
+   copy 2x fails to load data
+   focus is not codable so far looking for solutions
+   test a500 parm record setting
+4. major issues
+   1. all top code fires at beginning on every page ! wow. are you serious ? 
+      will likely keep this 
+      do not want to use read aheads
+5. notes from log
+
+-------------------------------------------------------------------
+A45 server must always be running 
+reason:
+all the top logic executes on all pages or network errors 
+occur
+may need to mitigate this but do not wish to add read aheads
+--------------------------------------------------------------------
+
+===== 2 instances of vite running =============
+produces a white screen
+besure to only have 1 running
+
+==== poc net 10 -- with efcore tools 9.0 timed out into azure 
+
+backing up
+
+
+2.1  stay and focus are working just fine - put logic in use effect wow Praise God !
+     should the main menu turn focus claim id off other screens right not it remans on
+     so subsequent historys go thre 
+
+pay ( ) has some issues see above - loop; stay not refreshing; balance owed -1 
+pay hist ( ) has some issues see above ; screen shows past claim data not current
+         ( ) add total and bal owed to screen
+
+gracefully exit if a45 server not running in interface 
+do not prefer to change 'above top' function calls to read aheads
+    
+backing up
+
+( ) better code = pull roof logic i.e. logic outside of functions into functions
+    in use effect that is purported in docs to run after load
+( ) bettter lif all localStorage up to one object called 'storage'
+    in application.
+( ) screens - add test mode check to all auth checks on all screens
+( ) test a500 parameter logic in interface
+( ) finish pay/history related issues noted above
+
+( ) storage object - 
+    add interface  variables
+
+( ) auth checks -
+    ( ) signin - testing a500 testMode = prod to see if kicked out
+    ( ) A500Parm = test,prod,start,unauth = using prod 
+
+( ) issue lost pw = space after entering cust 1
+
+( ) better code - try removing the roof/top logic into use effect.then's try
+    on plan screen before changing claim screen
+
+1. better code - using 'store' lifted state object -- in progress
+   ( ) appUser, and other interface varibles 
+
+2. get rid of roof code - next 
+   ( ) plan screen first as poc
+   ( ) was not able to get the 'await' to work put roof function back 
+   ( ) suggest on all the 'roofs' check appUser before running ??
+
+3. finish pay/pay history
+
+4. system test
+
+( ) back up 100 - 500 link added
+
+
+( ) CPM (app dest port hard coded must not be) read app dest 
+    for efficency fit into the A500Parm with syntax:  port(1234)
+
+( ) interface: prod we know 'no app dest shows on start' but will test
+    'startDest=unauth' -- this is working prod, unauth - gives unauth screen
+
+( ) incorrect uesr does not edit with prod,unauth debugging
+
+
+2.3
+A500 record (port:nnnn) coded to find appdest
+A500 record debug coded to turn on debug 
+
+test case interface
+
+* test mode turns debug on 
+debug on off
+mode prod  no port 
+mode prod port 
+
+( ) add global object to all routines
+( ) a. cust related : to update 
+    b. load variables on off
+    c. message variables
+
+
+( ) interface runs too many times
+( ) port read seems to be working
+( ) 120 can not update parm to test
+
+( ) global:
+    1. all items listed from local storeage: exclude signin, claim operation
+    2. screen by screen :  
+        in each screen only add updates to store ; leave all localstorage for updates and reads alone
+        later comment out local storages and test once tests good remove comments
+        a. sign in most writes coded 
+        b. application - most variables coded
+        c. register
+        d. update partially coded 
+       
+(done) fixing 120 to accept : and parens so we can test
+       ( ) 120 needs backup
+
+( ) interface test debug 
+
+( ) reduce multiple interface executions
+( ) add animation to wait 
+( ) add auth to each screen and test 'test mode'
+( ) test missing port 
+
+( ) interface stat/unauth destinations work just find for app dest missing - prod
+    due to missing port number data
+( ) missng port test is working 
+( ) 130 prod turned off
+( ) 130 A45 turned off - payment history roof logic statement 11 blows up
+
+( ) interface current A500 = test start (port:7047) debug
+
+    ( ) missing A500 test prod and test modes
+    ( ) make sure code does not repeat
+    ( ) a45 missing pay hist line 11 blows up
+     
+    port test works
+    app dest works
+    debug test works - turn off rest of debugging
+    test mode works
+    1. test invalid user id in prod mode and test mode
+    2. test auth on all screens 
+    3. on all screens we only need to test appUser = '' in prod mode
+       in test mode it does not matter
+       ? note: is the interface auth uesr record read redundant because
+         a100 has checked this ?
+
+remaining p.m. activities --
+
+1. only use app user for auth checks on screen - interfce was not executed in these cases
+
+    signin (X) Success
+    regiseter (x)
+    * put these in useEffect but need to modify setstate test mode to 
+    '' so that the tests will work when testing 
+    session storage
+    testMode = '' being used
+
+
+2. poc hello signin -> main menu setStore - fix state update error render -> diff component
+
+    ** this poc works setting store.hello in signin lives to main menu
+    need to resolve setState in render of parent state i react confused
+    on dup state names is that the issue ??
+
+    * signin -> update works
+    * reg -> update fails - see menu json display in this case 
+    would like to use application.store as much as possible
+    warning:
+    the (screen is loaded) stuff should not be put into state 
+    as it froze the app 
+
+3. animation in wait
+
+   ( ) need to draw boxes - not lines
+   ( ) test counte to 20 then starts - but this has an issue 
+
+4. interface exec count is it fixed ?
+
+study
+
+c# corner do example of code first, the most used and migrations
+learn C# pattern matching
+ 
+( ) debug register to update not working
+( ) where possible use store : but not in screen load indicators
+( ) was not able so far to get rid of roof functions
+( ) looks like ai engenders human to computer intrfacing but 
+    how about complex systems
+
+backing up
+    
+( ) wait - moved navigate out of interface and to wait to stop hook violoations
+( ) test mode - seems to work
+( ) roofs - based on history the template is as follows and perhaps will work 
+    non async tsx
+    function <- key here is not to use await on the caller
+
+    sync function = 
+
+        await some routine 
+
+backing up
+  
+(Success) 1 pay hist return - Praise God
+    . check if start up and show appropriate error screen
+    . workaround for no a4server
+
+( ) 2  pay hist showing wrong data
+
+(Success) 1 interface - 
+    production test is working 
+    refresh is working
+    note: could not stop wait from calling interface more than once
+    the refresh logic kicks in the second time and we are ok
+    note: not able to switch localStorage flag off in useeffect like history does
+
+
+ ( ) 3 auth tests on screens mode - direct url /signin etc.  = prod appuser = '' error out
+       ( ) not started yet
+       ( ) how do we know if we are in test mode ? 
+       ( ) not working with latest code
+
+
+ (Success) 3 wait chnage bars to squares  use /wait?w=1 to test Praise God 
+      
+ ( ) 4 change use of local storage to app object 
+       ( ) reg to update not working
+       ( ) sigin to update working 
+       ( ) light mode
+       ( ) signin
+       (fixed) claim (adj/cpy) - coded but not working
+           1019 what.claimIdNumber not defined stops stamp 
+    (working) plan - input store.customerstorage empty displaying revert to localstorage 
+
+( ) pay history screen - added total and balance ; total not showing up
+
+( ) focus off adjustment message is too general
+
+( ) sign in auth check coded with useEffct navigation 
+    (  ) in prod mode test fails screen comes up
+
+(Success) register stored customer is fixed using 'store' consolidated setStore
+( ) update scrambles date upon update
+
+
+status listed on read me and prot fileds
+
+
+A500 ( ) 
+      plan and adj copy working ok after upgrade to global state
+      register working ok with update after migration to global state
+      sign in auth check not working 
+      pay history added total and balance display amounts
+      pay history still needs refresh to show accurate data
+      stay,no focus message at top of history needs to tell which claim was added, copied, paid or adjusted
+
+
+
+ok , backing up
+
+
+( ) change reset of local storage to Store stuff 200
+    . mainMenuMessage - changed from local storage 
+    . concern - register looses it 
+
+
+( ) see if roof code can be removed 
+
+( ) lost customer - 
+    select plan seems to remove storedCustomer from the store tried putting the parm but no effect
+    change reg, up, plan and signin to use localstorage stored customer
+    at this time
+    update: reads store with stopgap to use localhost + msg
+
+( ) local storege -
+    ( ) test existing changes to make sure the (...) not needed before continuing
+
+( ) roof - can we remove 
+    hist - does not use try fixing plan
+    plan - removed roof used getPlans and the 'claw' perform screen load from
+           'inside' of getPlans similar to history coding 
+
+( ) fix add user and update user so cust search works 
+
+(Success:plan) plan screen had its 'roof' removed by 
+    calling function in use effect
+    and putting the screen lines in state 
+    Praise God 
+    * roof removal
+    ( ) all screens must set the plan reload parameter so the screen will load
+
+( ) add user, update user - for customer add and update these have been coded
+( ) claim add has add user coded now; stamp had the app user coded already
+
+( ) complete roofing 
+( ) test setStore with current code and fix before proceeeding
+( ) pay history not showing current data
+
+block 1 :  issues 
+
+   o 2 ( )x  add required code for missin A45 since 2 catchers gone due to pay / claim screens being fixed
+   o 2 ( )x  pay history remove roof logic - code done lines not showing
+   o 3 ( )x  claim remove roof logic - code done need to test
+   o 4 (x)   stay history message at top needs more detail
+   o 4 ( )   auth checks on each screen mode=prod appuUser=''
+               -- ( )x sign in
+
+   o   (X) 1 update date shows /1/55/01/0 - fixed use date as is from register ; format on signin from database
+   o   (x)   temp: move a45 check from pay history to claim since it is the last 'roofed' routine to run at start
+
+
+block 2: localStorage -> Store global 
+
+    o 3 conversion to store from localstorage
+    o 2 determine plan question screen issue before proceeeding need ... ?
+        (x) unresulved turning off alerts
+
+block 3: fit finish
+
+   (x) label highlighting for update and claim screens
+   ( ) main menu message calc msg length and off set field to adjust
+
+
+net rules for code first conn string and fix example
+400 double space
+
+activities:
+   pay history - removed roof put screen lines in state 
+   claim - removed roof put screen lines in state
+   note: prod - start up a45 logic needs to be recrafted since will not be caught
+         in the top aka 'roof' code now removed before functions
+
+
+pay history 52:49 is working : return to history focus is working too 
+
+but signs out and does not show balance owed 
+but roof replaced successfully o the subtiles of javascript !
+
+status:
+
+pay history is basically working - stay and focus not working when stay and focus on 
+            and pay history should scroll to top too 
+
+testing claim screen - 
+
+( ) removed 'selectedService' from onTypeChange since it is stored in multiple places in 
+    session storage
+
+( ) blank screen -  gets to 144 then runs to customer search in the debugger
+    ** start here ** debugging this screen 
+    bugger goes down a few lines and jumps to other screen load * fix *
+
+( ) test fix a45 missing at start up prod mode 
+
+( ) 'customer search' -- 
+    one more 'roof' read cust for user A45 check being moved there until that screen fixed.
+    it is firing when claim screen runs...
+
+backing up
+
+read me
+UP30 A500 Feb 06 2026
+=====================
+
+1. pay history screen - this screen is fixed and is working except it needs to scroll to the top
+                        return stay and focus not working however
+2. add label highlights for update and claim screen
+3. update - cusomerStorage issue persists update has workaround to use session storage if coming from register
+4. update - fixed date formatting from db or register screen
+5. fixed history message at top for more detail on adjustments
+6. menu message should be positioned based on length so it does not move to extreme left
+7. a45 check keeps moving ! as screens are fixed and roof functions removed this check has to move it is now
+   on customer search , the last roofed screen with function outside at top of module moves like north pole
+   when cust search screen is fixed this a45 check must be tested on interface in prod mode 
+
+2.7
+
+( ) claim screen updated to remove roof or function at top 
+    works but 1st selection not showing ; missing state initial
+( ) customer search updated to remove roof or function at top - lines put in state
+( ) interface added 'undefined' as first check on parm to indicate A45 server not running
+( ) first auth check in : signin do not move to other screens until working and tested
+( ) module : reset screen loads perf from all screens in one place
+( ) main menu message position based on length - moved to left , for now
+
+( ) a45 check - in prod - if a45 runs missing app dest, if not switch to test mode
+( ) claim - service not auto populated and claim not added
+( ) cust search not showing data
+
+backing up - a.m.
+
+p.m.
+
+(Success) claim screen is working great 
+( ) sign in customer list
+    o screen does find customers
+    ( ) sign - in screen needs to display cust name message and cust id in cust id field  
+
+
+ ( ) a45 off test   - fails - display 3 mgs and stops : added .catch() to await 
+     not trapping ERR_CONN_REFUSED
+ ( ) sign in auth test - fails 
+ ( ) pay hist needs to scroll to top
+ (fixed) cust 1 lost password adding cust 2
+
+
+ post back up
+
+ (x) register - use custPass not 'custPassword' a4server uses .custPass to load data
+ (X) sign in is finished cust name and selected id show on signin screen after selection
+
+ 2.8
+
+ (fixed) interface put test in for port = '' to stop exe 
+         A45Server
+         logic is fixed
+
+ (idone) sign in auth - checking sign in screen 
+
+     ( ) sign in screen - auth check - is working passed - just put in displays no change to code
+         copy sign in code: update, menu, plan , claim, hist, cust searech
+     ( ) regular test ok but hist no loading
+     ( ) test unauth access in each screen
+ 
+
+(skip) move to store from local storage - only few left
+    do not touch interface or screen load switches
+    probably skip the rest of this 
+
+(Success) put in auth checks on all screens
+    *** this is working done 
+    ( ) signin - works
+    ( ) code other screens to match sign in 
+        -- code by blank appUser in start 
+        x - register
+        x - main menu
+        x - claim, plan, history, customer search
+        x  - pay hist
+        x  - plan question 
+
+(completed) pay hist needs stay and focusing - t
+    ( ) app signs out and
+    ( ) hist screen = loaded 
+    ( ) debug 
+
+(completed) put in auth checks all screen retested - history screen not reloading
+
+( ) fit finish 
+
+backing up 2.8
+
+( ) pay - removed win reload if stay = on so no blanking but amount fields not updating if stay is on  
+    they do if stay is off 
+    ( ) check 410 and 50 on how react solved the stay/pay issue
+        uses windows location reload 
+(Success) pay history - always 'stays' and focuss on 'wrong' claim the last prior focused on lpfo
+
+
+(Success) put in non matching path logic to unauth
+
+remain issues:
+
+( )x CPM Stay pay amounts not immediately updated
+       
+    a. init set all data-ps-on-seq   lines off ; only the data-ps-off-seq lines will show
+    b. pay claim set 2 lines on  data-ps-on-seq (2) lines; set corresponding lines off
+
+( ) fit finish
+
+   ( ) large borders around color squares cf A30
+        border: 5px solid var(--white);
+        border-radius: 5px;
+        * already coded 
+        a. maybe because used label here and not divs like in 30 
+
+   (Success)x CPM hist pay - scroll up
+       history uses href to do this for top 
+       ( )x javascript in useEffect to scroll to top
+
+backing up
+
+(Success) pay stay is fixed - Praise God 
+( ) adjusted color box properties not showing border cf 30  
+(x) remove console.logs use s() 
+(skip the rest) do app store moves very incrimentally judiciously 
+ 
+( ) determine how test mode can work with out app dest call 
+    ( ) if you clear browser should not work due to empty local storage - review local storage
+
+backing up on 2.13
+
+( ) feature debug 
+    . read d=y and set global debug pushed to scree parm
+    claim screen - added s() and one display to test
+    
+( ) add options to wait screen - in testing
+    d,i,w options added (this updated on 2.15)
+      
+
+2.15 
+ 
+( ) s() replaces console log
+    update
+    claim
+    register - skip not many displays - skipped
+    history
+    plan
+    (x) database - need to pass store so just turn off skip
+    signin 
+    (x) cust search
+
+( ) fix interface was moving boxes very fast
+
+( ) w never leaves wait at 20 second
+    message does not show up
+
+(fixed) sign in only accepts 1 - cleard variable
+
+(fixed) 2002 will not show history - before histLoad indicator moved to store
+    fixed see below issue with customer id hardcoded 1
+
+:: localStorage converstion to 'store':
+
+>> these did not work - undone - hung app 
+(removed)  store : historyLoad indicator coded 
+(removed)  store : updateload indicator coded
+     (issues with these debug before proceeding) 
+
+ ( ) start - added disp of appsest items : test mode works as localstorage held in browser
+
+ (fixed) pay claim - cancel does not work in dialog
+     i.e. click 'cancel' does not work ; adeed code for this.
+
+ ( ) interface - w does not work have not tested i  d seems to work
+
+ ( ) add l=y for light mode
+ ( ) scnario: if no localhost set for app dest write message that test mode only works after
+     1 invoking via standard entry screen 
+
+2.21 500 react 
+
+-- this is working correctly --
+test mode - works with out app dest
+prod fails correctly without app dest or 45
+
+-- next test start dest override
+
+( ) 2 all admin features missing
+
+2.28
+
+-- admin signin 
+-- admin main menu
+
+
+( ) adjusted color box properties not showing border cf 30  
+
+system test clams 
+
+cust 10 sam smith Femail
+(Success) CPM - claim add screen fails 
+
+    ( ) no it  did not ! CUST ID = 1 HUH 
+    note: cust stamp is 'unknown' forom test mode 
+
+system test ok
+only 1 issue found and fixed
+did not test admin stuff yet 
+
+3.2 changes
+    (x) set proper customer id on claim add 
+
+3.5
+
+    ( ) added top admin screens
+    ( ) 600 has no securty for lists skip this for 500 also
+
+3.6 
+
+    ( ) coded basic customer list prompt and customer list screens
+
+backing up
+
+3.7
+
+( ) customer list up and running + customer data + pin logic - no stamps 
+( ) user list prompt
+( ) comment list prompt 
+
+a.m. backup 3.7
+
+( ) basic user list report coded
+
+p.m. backing up 3.7 number 2
+
+( ) user comment search - up and running 
+
+p.m. backing up 3.7 
+
+3.9
+
+( ) addded claim data pin stamp logic to customer list report
+( ) customer report restructured logic see 1a 1b 1c performing load after read logic
+    did not work due to async nature : had to stack one inside the other
+    late: now gettingdup key errors but on right track here
+
+TODO:
+fix front end inter face to get app dest first proposed
+
+backing up
+
+3.11
+
+( )  worked on customer list report 
+( )x admin reset customer id coded
+( )x admin reset password coded
+
+TODO: finish customer report
+TODO: clean up the comment report to have a comment list under each user 
+TODO: once customer list report done copy to user report 
+
+( ) copying docker file from 600
+
+( ) A45 needs to be fixed because this and other reports are missing
+   patient first and patient last
+( ) debug looks good the code did what and where it need to do following the
+    customer and claim logic
+( ) objects are not valid as react object - patient last
+    suspect this is null due to the A45 suspected error of not returning that data
+    in the code for now plug patient first and last with unknown values word unknown
+    ** double brackets around 'patientLast
+
+(Success) Claim summary and claim detail are now working on this report
+( ) fix A45 looks like returning 'custFirst' and 'custLast' not 'patientFirst' 'patientLast'
+    check this. 
+
+3.12
+
+(Success) customer report - get rid of v-if's copied from vue and use if's please 
+(skip for now) comment list order by user and put button break requires a proc change
+(fixed) get the adm id working on 500 it's not working for type='admin'
+    ( ) admin sign in -  line 308 trim auth level
+
+(fixed) links flip to 'sign in'
+
+(Success) Password Reset 
+
+( ) customer reset has isseus
+
+( ) add customers only to user report
+( ) test password and customer resets
+
+( ) put to production and do systems test
+(skip) a45 fix ?
+
+3.12 ---  a.m. backup at customer report working milestone
+
+( ) tried to user docker file not sure if correct
+
+( ) user report - coding customer logic - in process
+
+3.12 ---  p.m backup at coding user report 
+
+( ) customer reset works but messages and response are inconsistent
+    debugging looked ok for all conditions ! sometimes error message does not show up 
+    the awaits are not awaiting correctly do I have to chain them like claim does for 
+    adjustments. Right now turned off feature. see claim and add/adjustment logic 
+    for exmple chain.
+
+    not getting consistent results from exist call 
+    w/wo debugger has different results ! 
+    workaround: just call the reset - last reseort
+
+( ) user report  
+    ( ) customer data in wrong position
+    ( ) toggles not working on customer level
+    ( ) need to code claim level button logic 
+
+( ) 500 has bad routes coded on some admin screens
+( ) 500 has additional issues
+
+backing up 3.13
+
+
+500 ( ) todo: user list
+        code the claim level buttons
+        reorder the keys to reorder lines
+        fix the toggle logic that does not work
+600 ( ) fix the bad admin routes and other issues 
+        o flicker 
+        o screen bottom padding
+
+500 ( ) comment report after reading use linq on the 
+        loaded records to sort
+
+3.15
+
+( ) comments report - coded fixes in wrong report users - move back
+( ) user report 
+    ( ) prompt select working
+    ( ) clean up data before teting further with 2 users second user has no matching record
+    ( ) pin not working
+    ( ) testing customer summary
+
+backing up
+
+3.16 a.m. changes / status: 
+
+    user report on custoemr level is working for all uses except first one at top
+    comment report is sorting users ok but button line is not showing up
+    cust reset - not consistent existence check results look at other apps to see how
+                 this was coded for timing async but that should not matter
+
+() user report - customer summary and detail
+   ( ) pin, customer detail and summary are working now
+   ( ) 'none' working
+   ( ) todo:
+       ( )x cust stamps
+       claim summary
+       claim detail 
+       claim none
+       claim stamps
+
+( ) sort comment report
+    ( ) sort is working just fine
+    ( ) button line not showing correctly - 
+        single use - no buttons
+        multiple - only line at end of report
+
+( ) cust reset
+    ( ) not consistently working 
+
+( ) pat first and last missing from 45 ! still. 
+
+
+( ) user report 
+    pin customer summary detail good 
+    customer stamps headers - extra ones showing up
+
+ ( ) comment report
+     last user 'second' does not show up
+
+3.16 backing up
+
+3.17
+
+( ) user list coded claim logic to read and write claim lines
+    increased basic key incriment since claims incriment key by 100
+
+( ) pending : finish comment list report
+
+( ) pending: fix reset customer
+
+
+tsconfig:
+to compile set nounusedlocals in all the tsconfig files
+
+3.18
+
+user screen ( )x - coded second call to load cust screen after claims loaded to time propertly
+              the insertion of records into lines
+              LoadCustomerScreen is called two times - the second to load customers 
+              after the claim lines have been loaded to properly time the loadings
+              I checked the keys they look in order
+
+(success) fixed - write final comment logic added - comments screen - running debugger
+          (Success)  use select - fix logic
+          (x)  added return buttons
+
+100 - blocked checking coding in the recent module - the last time a variable for link was not set (null)
+      inspected code A100 looks good - put debug in
+      ( ) code looks good check link
+
+
+(fixed) as in 600 put black background at top to avoid white 'show' at start 
+(success) comment report looks good
+
+issues: A500 react 
+
+CPM issue:
+( ) read appdest url from code with t or p setting ignore urldest on parm record but use other values 
+    there 
+( ) not loading pictures -
+    rename assets to images and placed it under src and public
+    coding links to match 600 so prod server finds them ok
+
+Fit Finish Issues:
+( ) links do not work
+( ) customer reset 
+( ) user report claims still coming out at end 
+
+notes:
+
+fixes:
+1. fixed the P20Interface:
+   a. Read App Dest First manually set t or p to point to A130insurance
+2. checking image directory setup comparing 600
+
+*** this is 500 here is the 600 image setup:
+600 start
+src="./images/rock.jpg"
+
+600 classic
+:src="`/images/${item.pic}`">
+
+src/images
+public/images
+
+** end of 600 image setup 
+
+portfolio:
+
+A500 ( ) fixed picture links and renamed assets dirs. to images could have left as assets
+         but code had images
+A500 ( ) fixed baseUrl in database.tsx to be set in localhost upon app dest logic
+
+as this sats pics are in images below public and src (assets dir renamed due to coding references)
+importantly, baseUrl set properly in database.tsx when app dest runs this was hard coded to local host
+
+
+** production test looked go so far 
+
+backing up on 3.19 
+
+3.20
+
+( ) user - screen fix suggestion resync keys to match order of records written to report
+( ) fix customer reset
+
+( ) user passed start key values to write customer lines 20 and 300 after claims
+
+5.21 -- You will succeed
+
+(Success) user report - put claim loop inside customer loop had to do this due to
+    java script not allowing awaits 
+    report is working great
+
+(Success) customer reset - now working just fine
+    set messages in call backs and tested for non blanks in later code
+    working great
+
+(Success) set up app dest after image so we can run in test mode
+          ( ) works, but, getting 'server not started message' on start screen 
+
+ready for system test
+
+3.21 backuping Praise God

@@ -1,0 +1,7 @@
+Read Me UP58A500Insurance Oct 27
+================================
+
+fixed start up issue was getting invalid path name error
+that was correct was not passing the path name back from the routine called:
+interface initialization
+
